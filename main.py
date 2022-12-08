@@ -1,7 +1,7 @@
 from turtle import Turtle, Screen
 import random
 
-pointer = Turtle()
+# pointer = Turtle()
 screen = Screen()
 
 # pointer.pd()
@@ -42,24 +42,35 @@ screen = Screen()
 
 screen.setup(width = 500, height = 400)
 
+race_on = False
 user_bet = screen.textinput(title = "Make your bet", prompt = "Which turtle will win the race? Enter a color: ")
 print(user_bet)
 colors = ["red", "blue", "yellow", "green", "orange", "purple"]
-y_positions = [100, 60, 20, -20, -60, -100]
+y_positions = [105, 65, 25, -15, -55, -95]
+turtle_list = []
 
-for i in range (len(colors)):
+
+for i in range (0, 6):
     turtle = Turtle("turtle")
+    turtle.color(colors[i])
     turtle.pu()
     turtle.goto(x = -210, y = y_positions[i])
-    turtle.color(colors[i])
+    turtle_list.append(turtle)
+    
+if user_bet:
+    race_on = True
 
-
-
-
-
-
-
-
+while race_on:
+    rand_int = random.randint(0, 10)
+    rand_turtle = random.choice(turtle_list)
+    rand_turtle.forward(rand_int)
+    if rand_turtle.xcor() > 230:
+        race_on = False
+        winning_color = rand_turtle.pencolor()
+        if winning_color == user_bet:   
+            print(f"You won!. The {rand_turtle.pencolor()} turtle finished first.")
+        else:
+            print(f"You lost. The {rand_turtle.pencolor()} turtle finished first.")
 
 screen.exitonclick()
 
