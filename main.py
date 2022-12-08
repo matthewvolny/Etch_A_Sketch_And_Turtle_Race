@@ -64,7 +64,7 @@ while race_on:
     rand_int = random.randint(0, 10)
     rand_turtle = random.choice(turtle_list)
     rand_turtle.forward(rand_int)
-    if rand_turtle.xcor() > 230:
+    if rand_turtle.xcor() > 220:
         race_on = False
         winning_color = rand_turtle.pencolor()
         if winning_color == user_bet:   
